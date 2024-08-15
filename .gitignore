@@ -132,3 +132,4 @@ dmypy.json
 # Files that are easy to generate
 data/
 correspondance_listing/
+tmp/

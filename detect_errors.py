@@ -25,7 +25,7 @@ def check_listings(merlin: Path, images: Path) -> List[Tuple[str, str, int]]:
     Check that the listing has correctly been downloaded
     """
     missing = []
-    listings = [f for f in merlin.rglob("*") if f.is_dir() and f.parent != merlin]
+    listings = [f for f in merlin.rglob("*") if f.is_dir() and f.parent != merlin and ".DS_Store" not in str(f)]
 
     for listing in tqdm(listings):
         location = listing.parent.name
@@ -64,6 +64,8 @@ def check_missing_images(merlin: Path, images: Path) -> List[Tuple[str, str, int
     locations = list(images.iterdir())
 
     for location in tqdm(locations):
+        if ".DS_Store" in str(location):
+            continue
         for listing in location.iterdir():
             if not listing.is_dir() or listing.parent == merlin:
                 continue
